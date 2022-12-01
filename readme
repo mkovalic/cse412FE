@@ -3,7 +3,7 @@ SETUP
     2. Express must be installed (npm install express --save)
     3. pg must be installed (npm install pg)
     4. Cors must be installed (npm install coors)
-    5. Replace 'client' fields to work with your database
+    5. Replace 'client' fields in dbcon.js to work with your database
 
 
 HOW TO RUN
