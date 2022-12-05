@@ -5,9 +5,9 @@ const {Client} = require('pg') //postgre
 
 const client = new Client({
 	host: "localhost",
-	user: "michael",
-	port: "8888",
-	database: "michael"
+	user: "harrisonglenn",
+	port: "8898",
+	database: "harrisonglenn"
 })
 
 const port = 3000
@@ -21,24 +21,9 @@ app.listen(port, () => {
 })
 
 
-/*app.get('/', (req, res) => {
-  res.json('urmom!')
-})*/
-
-
-
 client.connect();
 
 //get data from postgres
-app.get('/region', (req, res)=>{
-    client.query(`Select * from region`, (err, result)=>{
-        if(!err){
-            res.send(result.rows);
-        }
-    });
-    client.end;
-})
-
 app.get('/airline', (req, res)=>{
     client.query(`Select * from airline`, (err, result)=>{
         if(!err){
@@ -58,7 +43,15 @@ app.get('/airport', (req, res)=>{
 })
 
 app.get('/city', (req, res)=>{
-    client.query(`Select * from city`, (err, result)=>{
+    const query = `SELECT *
+    FROM city c
+    WHERE EXISTS (
+      SELECT 1
+      FROM airport a
+      WHERE a.city_code = c.code
+    );
+    `
+    client.query(query, (err, result)=>{
         if(!err){
             res.send(result.rows);
         }
@@ -75,5 +68,11 @@ app.get('/country', (req, res)=>{
     client.end;
 })
 
-
-
+app.get('/matchedairports', (req, res)=>{
+    client.query(`Select * from matchedairports`, (err, result)=>{
+        if(!err){
+            res.send(result.rows);
+        }
+    });
+    client.end;
+})
