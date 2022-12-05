@@ -31,7 +31,9 @@
     <noscript>You need to enable JavaScript to run this app.</noscript>
     <div id="root">
         <div id = "lab">
-            <h2> Airline Pricing Tool </h2>
+            <h2> Vacation Suggestion Wizard </h2>
+            <h3> Enter your current location and fllight budget, and we will suggest places to visit! </h3>
+            <br>
         </div>
         <div id="datapanel">
           <div id="strings"></div>
@@ -40,27 +42,21 @@
 <form>
   <label for="input1">Please enter your current city:</label>
   <br>
-  <input type="text" id="input1" placeholder="Phoenix, Tempe, etc.">
+  <input type="text" id="input1" placeholder="Phoenix, Austin, etc.">
   <br>
   <label for="input2">Please enter your budget in $USD:</label>
   <br>
   <input type="text" id="input2" placeholder="500, 2000, etc.">
   <br>
-  <button type="submit" onclick="handleSubmit()">Submit</button>
-  <br>
-  <button onclick="showStrings(cities)">Show strings</button>
+  <button type="button" onclick="handleSubmit1()">Submit</button>
+  <br>  <br>  <br>
 
 </form>
 
 
-<table>
-  <thead id="table_head">
-    <tr>
-      <th id="table_city_name">City Name</th>
-      <th id="table_airport_name">Airport Name</th>
-      <th id="table_price">Estinamed Flight Cost</th>
-    </tr>
-  </thead>
+<table id="tableID" style="border: 1px solid #ddd;
+padding: 8px;">
+  
   <tbody>
 
   </tbody>
@@ -69,6 +65,14 @@
 
 
     <script>
+      function handleSubmit1() {
+        let childrenList = document.getElementById('tableID').children;
+        if (childrenList.length > 0) {
+            childrenList[0].remove();
+        }
+                handleSubmit();
+      }
+
     function handleSubmit() {
     // Get the values of the text fields
     const input1 = document.getElementById('input1').value;
@@ -77,25 +81,33 @@
     // Call the processInputs function and pass the values of the text fields as arguments
     let array = processInput(input1, input2);
     
-    let cityName = document.getElementById('table_city_name');
-    let airportName = document.getElementById('table_airport_name');
-    let price = document.getElementById('table_price');
-    let table = document.getElementById('table_head');
-    for (var i = 0; i < array.length; i++) {
-        var obj = array[i];
-        let tempRowStart = document.createElement('<tr>');
-        let tempRowC1 = document.createElement('<td>' + obj.city + '</td>');
-        let tempRowC2 = document.createElement('<td>' + obj.airport + '</td>');
-        let tempRowC3 = document.createElement('<td>' + obj.price + '</td>');
-        let tempRowEnd = document.createElement('</tr>');
-
-        table.appendChild(tempRowStart);
-        table.appendChild(tempRowC1);
-        table.appendChild(tempRowC2);
-        table.appendChild(tempRowC3);
-        table.appendChild(tempRowEnd);
+    function generateTableHead(table, data) {
+      let thead = table.createTHead();
+      let row = thead.insertRow();
+      for (let key of data) {
+        let th = document.createElement("th");
+        let text = document.createTextNode(key);
+        th.appendChild(text);
+        row.appendChild(th);
       }
-  }
+    }
+
+      function generateTable(table, data) {
+        for (let element of data) {
+          let row = table.insertRow();
+          for (key in element) {
+            let cell = row.insertCell();
+            let text = document.createTextNode(element[key]);
+            cell.appendChild(text);
+          }
+        }
+    }
+
+    let table = document.querySelector("table");
+    let data = Object.keys(array[0]);
+    generateTableHead(table, data);
+    generateTable(table, array);
+}
   </script>
 
 

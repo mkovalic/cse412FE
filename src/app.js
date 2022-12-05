@@ -57,9 +57,13 @@ function processInput(cityString, budgetString) {
         alert("Please select a price of at least $300.");
         return;
     }
+    if(parseInt(budgetString) > 5000) {
+        alert("Please select a price no greater than $5000.");
+        return;
+    }
     let found = false;
-    homeLatitude = 0;
-    homeLongitude = 0;
+    let homeLatitude = 0;
+    let homeLongitude = 0;
     for(let i=0;  i<cities.length; i++) {
         if(cityString.toLowerCase() === cities[i].theName.toLowerCase()) {
             console.log("YEAH BABYYYYYYY");
@@ -70,19 +74,19 @@ function processInput(cityString, budgetString) {
         }
     }
     if(!found) {
-        alert("Please enter a vlid city.");
+        alert("Please enter a valid city.");
         return;
     }
     console.log(homeLatitude);
     console.log(homeLongitude);
 
     // for each country, evaluate price
-    priceList = [];
+    let priceList = [];
     for(let k=0; k<cities.length; k++) {
-        tempName = cities[k].theName;
-        destLat = cities[k].theCoords.lat;
-        destLon = cities[k].theCoords.lon;
-        tempPrice = calculatePrice(homeLatitude, homeLongitude, destLat, destLon);
+        let tempName = cities[k].theName;
+        let destLat = cities[k].theCoords.lat;
+        let destLon = cities[k].theCoords.lon;
+        let tempPrice = calculatePrice(homeLatitude, homeLongitude, destLat, destLon);
         priceList.push(
             {
                 tempName, 
@@ -97,13 +101,13 @@ function processInput(cityString, budgetString) {
 
     // select 10 interesting cities within the budget and calculate their price based on
     // Create a new empty array for the selected elements
-    const selectedFlights = [];
+    let selectedFlights = [];
 
     // Determine the number of elements in the array
-    const numElements = filteredPriceList.length;
+    let numElements = filteredPriceList.length;
 
     // Set the interval between selected elements
-    const interval = Math.floor(numElements / 9);
+    let interval = Math.floor(numElements / 9);
 
     // Select the remaining elements at regular intervals
     if (filteredPriceList.length > 10) {
@@ -122,8 +126,6 @@ function processInput(cityString, budgetString) {
     console.log(selectedFlights);
 
     // filter matched array based on city
-    let homeMatches = matchedArray.filter(item => item.city == cityString);
-    let homeData = homeMatches[0];
     let awayData = [];
     for(let k=0; k<selectedFlights.length; k++) {
         tempArray = matchedArray.filter(item => item.city == selectedFlights[k].tempName);
@@ -134,14 +136,17 @@ function processInput(cityString, budgetString) {
     // constucting the final array
     let finalBoss = [];
     for(let j=0; j<awayData.length; j++) {
-        currentCity = awayData[j].city;
+        let currentCity = awayData[j].city;
         for(let k=0; k<filteredPriceList.length; k++) {
             if(filteredPriceList[k].tempName == currentCity) {
                 finalBoss.push(
                     {
                         city: currentCity,
                         airport: awayData[j].airport,
-                        price: filteredPriceList[k].tempPrice
+                        price: Intl.NumberFormat('en-US', {
+                            style: "currency",
+                            currency: "USD",
+                        }).format(filteredPriceList[k].tempPrice)
                     }
                 )
             }
