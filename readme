@@ -1,3 +1,7 @@
+Github repo: https://github.com/mkovalic/cse412FE
+Video presentation: https://www.youtube.com/watch?v=6bFZ8USsG_Y
+All screenshots in screenshots folder of the github repo. 
+
 IDE SETUP
     1. node must be installed (ideally via nvm : https://github.com/nvm-sh/nvm)
     2. Express must be installed (npm install express --save)
@@ -6,13 +10,13 @@ IDE SETUP
     5. Replace 'client' fields in dbcon.js to work with your database
 
 POSTGRES SETUP
-    1. Start with a fresh Postgres server
+    1. Start with a fresh Postgres server (see startServer)
     2. Copy the entire contents of 'data/server_setup.txt'
     3. Paste it into your server terminal and hit enter. The database will automatically generate.
 
 
 HOW TO RUN
     1. Clone this repo and then start your postgresql database server.
-    2. In your IDE terminal, run the command 'node dbcon.js'
-    3. Start the program from index.html and enjoy!!!
-
+    2. Make sure that your dbcon fields are set up for your environment. (see dbFields)
+    2. In your IDE terminal, run the command 'node dbcon.js' (see startNode)
+    3. Start the program from index.html and enjoy! (see vacationWizard)
