@@ -18,5 +18,6 @@ POSTGRES SETUP
 HOW TO RUN
     1. Clone this repo and then start your postgresql database server.
     2. Make sure that your dbcon fields are set up for your environment. (see dbFields)
-    2. In your IDE terminal, run the command 'node dbcon.js' (see startNode)
-    3. Start the program from index.html and enjoy! (see vacationWizard)
+    3. In your IDE terminal, run the command 'node dbcon.js' (see startNode)
+    4. Start the program from index.html and enjoy! (see vacationWizard)
+
