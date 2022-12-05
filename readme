@@ -1,18 +1,18 @@
-SETUP
+IDE SETUP
     1. node must be installed (ideally via nvm : https://github.com/nvm-sh/nvm)
     2. Express must be installed (npm install express --save)
     3. pg must be installed (npm install pg)
     4. Cors must be installed (npm install cors)
     5. Replace 'client' fields in dbcon.js to work with your database
 
+POSTGRES SETUP
+    1. Start with a fresh Postgres server
+    2. Copy the entire contents of 'data/server_setup.txt'
+    3. Paste it into your server terminal and hit enter. The database will automatically generate.
+
 
 HOW TO RUN
-
-Clone this repo and then start your postgresql database server.
-
-Start the api server with, node dbcon.js. You should be able to access api endpoints at http://localhost:3000/<table_name>
-
-Open the index.html file in a browser and you should see it display data from the database
-
-
+    1. Clone this repo and then start your postgresql database server.
+    2. In your IDE terminal, run the command 'node dbcon.js'
+    3. Start the program from index.html and enjoy!!!
 
