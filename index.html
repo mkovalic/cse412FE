@@ -23,9 +23,10 @@
          text-align: center
     }
     </style>
+    <script src="src/app.js"></script>
     <title>Airline pricing tool</title>
   </head>
-  <body style="margin:0"> <!-- Remove the margin -->
+  <body > <!-- Remove the margin style="margin:0" -->
     
     <noscript>You need to enable JavaScript to run this app.</noscript>
     <div id="root">
@@ -33,11 +34,96 @@
             <h2> Airline Pricing Tool </h2>
         </div>
         <div id="datapanel">
-                <h3> placeholder </h3>
+          <div id="strings"></div>
         </div>
+<!-- Create a div element to hold the dropdown and the input field -->
+<form>
+  <label for="input1">Please enter your current city:</label>
+  <br>
+  <input type="text" id="input1" placeholder="Phoenix, Tempe, etc.">
+  <br>
+  <label for="input2">Please enter your budget in $USD:</label>
+  <br>
+  <input type="text" id="input2" placeholder="500, 2000, etc.">
+  <br>
+  <button type="submit" onclick="handleSubmit()">Submit</button>
+  <br>
+  <button onclick="showStrings(cities)">Show strings</button>
+
+</form>
+
+
+<table>
+  <thead id="table_head">
+    <tr>
+      <th id="table_city_name">City Name</th>
+      <th id="table_airport_name">Airport Name</th>
+      <th id="table_price">Estinamed Flight Cost</th>
+    </tr>
+  </thead>
+  <tbody>
+
+  </tbody>
+</table>
+
+
+
+    <script>
+    function handleSubmit() {
+    // Get the values of the text fields
+    const input1 = document.getElementById('input1').value;
+    const input2 = document.getElementById('input2').value;
+
+    // Call the processInputs function and pass the values of the text fields as arguments
+    let array = processInput(input1, input2);
+    
+    let cityName = document.getElementById('table_city_name');
+    let airportName = document.getElementById('table_airport_name');
+    let price = document.getElementById('table_price');
+    let table = document.getElementById('table_head');
+    for (var i = 0; i < array.length; i++) {
+        var obj = array[i];
+        let tempRowStart = document.createElement('<tr>');
+        let tempRowC1 = document.createElement('<td>' + obj.city + '</td>');
+        let tempRowC2 = document.createElement('<td>' + obj.airport + '</td>');
+        let tempRowC3 = document.createElement('<td>' + obj.price + '</td>');
+        let tempRowEnd = document.createElement('</tr>');
+
+        table.appendChild(tempRowStart);
+        table.appendChild(tempRowC1);
+        table.appendChild(tempRowC2);
+        table.appendChild(tempRowC3);
+        table.appendChild(tempRowEnd);
+      }
+  }
+  </script>
+
+
+
+
+<!-- Use CSS to style the dropdown and input elements -->
+<style>
+  #input1 {
+    width: 250px;
+    padding: 12px 20px;
+    margin: 8px 0;
+    box-sizing: border-box;
+    border: 2px solid #ccc;
+    border-radius: 4px;
+  }
+  #input2 {
+    width: 250px;
+    padding: 12px 20px;
+    margin: 8px 0;
+    box-sizing: border-box;
+    border: 2px solid #ccc;
+    border-radius: 4px;
+  }
+</style>
+
+
         
     </div>
-    <script src="src/app.js"></script>
     
   </body>
 </html>
